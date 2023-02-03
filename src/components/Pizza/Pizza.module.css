@@ -1,0 +1,39 @@
+.pizza {
+  border-bottom: 1px solid lightgray;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.description {
+  font-style: italic;
+}
+.price {
+  font-weight: bold;
+  font-size: 25px;
+  color: #ff8001;
+}
+.pizza input {
+  width: 50px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.pizza label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.pizza button {
+  background-color: #ff8001;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 30px;
+  color: white;
+  margin-top: 10px;
+}
+.pizza button:hover,
+.pizza button:active {
+  background-color: #ff4d00;
+  scale: 1.05 ;
+}

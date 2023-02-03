@@ -1,0 +1,32 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  word-wrap: break-word;
+}
+html {
+  font-size: 62.5%;
+  line-height: 1.6;
+  /* Footer support */
+  position: relative;
+  min-height: 100%;
+}
+body {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.6rem;
+  background-color: #F5F3F1;
+  color: black;
+}
+button,
+input {
+  border: 1px solid gray;
+  outline: none;
+  color: black;
+  font-family: inherit;
+  font-size: inherit;
+}
+button {
+  cursor: pointer;
+}

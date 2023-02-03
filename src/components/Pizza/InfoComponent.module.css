@@ -1,0 +1,16 @@
+.info {
+  position: relative;
+  background-color: #c1dade;
+  width: 50%;
+  text-align: center;
+  padding: 10px;
+  border-radius: 15px;
+  margin: 0 auto;
+  bottom: 50px;
+}
+.info h1 {
+  margin-bottom: 20px;
+}
+.info p {
+  margin-bottom: 10px;
+}
