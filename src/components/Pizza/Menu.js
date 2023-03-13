@@ -1,40 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Menu.module.css";
 import Pizza from "./Pizza";
 
 export default function Menu() {
-  const pizzas = [
-    {
-      name: "Neapolitan Pizza",
-      description:
-        "Features tomatoes, garlic, oregano, and extra virgin olive oil.",
-      price: "20.99",
-      id: "p1",
-    },
-    {
-      name: "Chicago Pizza",
-      description:
-        "Beef, sausage, pepperoni, onion, mushrooms, and green peppers, placed underneath the tomato sauce.",
-      price: "24.99",
-      id: "p2",
-    },
-    {
-      name: "Sicilian Pizza",
-      description: "Tomato, onion, anchovies, and herbs.",
-      price: "14.99",
-      id: "p3",
-    },
-    {
-      name: "Detroit Pizza",
-      description:
-        "Pepperoni, brick cheese (usually Wisconsin brick cheese), and tomato sauce",
-      price: "17.99",
-      id: "p4",
-    },
-  ];
+  const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const response = await fetch(
+        "https://webshop-19b45-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+      );
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const responseData = await response.json();
+
+      const loadedMeals = [];
+      for (const key in responseData) {
+        loadedMeals.push({
+          id: key,
+          name: responseData[key].name,
+          description: responseData[key].description,
+          price: responseData[key].price,
+        });
+      }
+      setMeals(loadedMeals);
+      setIsLoading(false);
+    };
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
+  }, []);
+  if (isLoading) {
+    return (
+      <section className={styles.MealsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+  if (httpError) {
+    return (
+      <section className={styles.MealsError}>
+        <p>{httpError}</p>
+      </section>
+    );
+  }
   return (
     <div className={styles.menu}>
-      {pizzas.map((pizza) => (
+      {meals.map((pizza) => (
         <Pizza
           name={pizza.name}
           description={pizza.description}

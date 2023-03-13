@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import CartContext from "./cart-context";
 const ADD = "ADD";
 const REMOVE = "REMOVE";
+const CLEAR = "CLEAR";
 
 const defaultCartState = {
   items: [],
@@ -53,6 +54,8 @@ const cartReducer = (state, action) => {
         totalAmount: updatedTotalAmount,
       };
     }
+    case CLEAR:
+      return defaultCartState;
     default:
       return defaultCartState;
   }
@@ -66,11 +69,15 @@ export default function CartProvider(props) {
   const cartHandlerRemove = (id) => {
     dispatch({ type: REMOVE, id });
   };
+  const clearCartHandler = () => {
+    dispatch({ type: CLEAR });
+  };
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: cartHandlerAdd,
     removeItem: cartHandlerRemove,
+    clearCart: clearCartHandler,
   };
   return (
     <CartContext.Provider value={cartContext}>
